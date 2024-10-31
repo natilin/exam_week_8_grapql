@@ -3,6 +3,7 @@ from flask_graphql import GraphQLView
 from graphene import Schema
 
 from app.db.database import init_db
+from app.db.repository.mission_repository import find_mission_by_id
 from app.gql.query import Query
 
 app = Flask(__name__)
