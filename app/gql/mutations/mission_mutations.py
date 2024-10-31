@@ -19,6 +19,20 @@ class CreateMission(Mutation):
     mission = Field(MissionType)
 
     @staticmethod
-    def mutate(root, info, mission: dict):
-        new_mission = Missions(**mission)
-        return create_mission(new_mission)
+    def mutate(root, info,
+               mission_date,
+               airborne_aircraft,
+               attacking_aircraft, bombing_aircraft, aircraft_returned,
+               aircraft_failed, aircraft_damaged, aircraft_lost):
+
+        new_mission = Missions(mission_date=mission_date,
+                               airborne_aircraft=airborne_aircraft,
+                               attacking_aircraft=attacking_aircraft,
+                               bombing_aircraft=bombing_aircraft,
+                               aircraft_returned=aircraft_returned,
+                               aircraft_failed=aircraft_failed,
+                               aircraft_damaged=aircraft_damaged,
+                               aircraft_lost=aircraft_lost
+                               )
+        inserted_mission =  create_mission(new_mission)
+        return CreateMission(mission=inserted_mission)
