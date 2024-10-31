@@ -14,8 +14,5 @@ class Test(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
 
 
-def init_db():
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
 
 
