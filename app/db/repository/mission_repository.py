@@ -57,13 +57,13 @@ def create_mission(new_mission: Missions):
 def update_mission_result(mission: Missions):
     with session_maker() as session:
 
-        mission_to_update = find_mission_by_id(mission.mission_id)
+        mission_to_update = session.query(Missions).get(mission.mission_id)
         mission_to_update.aircraft_returned = mission.aircraft_returned
         mission_to_update.aircraft_failed = mission.aircraft_failed
         mission_to_update.aircraft_damaged = mission.aircraft_damaged
         mission_to_update.aircraft_lost = mission.aircraft_lost
-
         session.commit()
+        session.refresh(mission_to_update)
         return mission_to_update
 
 
