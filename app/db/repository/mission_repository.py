@@ -39,5 +39,10 @@ def find_missions_by_target_type(type):
                 .all())
 
 
-
+def create_mission(new_mission: Missions):
+    with session_maker() as session:
+        session.add(new_mission)
+        session.commit()
+        session.refresh(new_mission)
+        return new_mission
 
